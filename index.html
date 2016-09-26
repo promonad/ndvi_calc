@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	
+	<link rel="shortcut icon" href="assets/favicon.png" type="image/png">
+
+	<title>NDVI Calculator</title>
+
+	<link rel="stylesheet" href="assets/demo.css">
+	<link rel="stylesheet" href="assets/header.css">
+	<link rel="stylesheet" href="assets/footer.css">
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+    <script type="text/javascript" src="./fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+    <link rel="stylesheet" href="./fancybox/jquery.fancybox-1.3.4.css" type="text/css" media="screen" />
+	<link href='http://fonts.googleapis.com/css?family=Cookie' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+
+	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.css"/>
+	<script src="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.js"></script>
+	
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("a.popup").fancybox({
+				maxWidth : 800,
+				maxHeight : 600,
+				fitToView : false,
+				width : 500,
+				height : 400,
+				autoSize : false,
+				closeClick : false,
+				type: 'iframe'
+			});
+		});
+	</script>
+
+</head>
+
+<body>
+
+<header class="header-two-bars">
+
+	<div class="header-first-bar">
+
+		<div class="header-limiter">
+
+			<h1><span>NDVI</span> Calculator</a></h1>
+
+			<nav>
+				<a class="popup" href="pages/ndvi.html">What is NDVI?</a>
+				<a class="popup" href="pages/about.html">About Intetics</a>
+			</nav>
+
+			<img class="intetics-logo" src="assets/intetics_logo.png">
+		</div>
+
+	</div>
+
+	<div class="header-second-bar">
+
+		<div class="header-limiter">
+			<h2><img src="assets/scale.png"></h2>
+			
+			<nav>
+				<a class="popup" href="pages/devteam.html"><i class="fa fa-group"></i> Dev Team</a>
+				<a class="popup" href="pages/tech.html"><i class="fa fa-cogs"></i> Technology</a>
+				<a class="popup" href="pages/report.html"><i class="fa fa-bug"></i> Report Bug</a>
+			</nav>
+
+		</div>
+
+	</div>
+
+</header>
+
+<div id="map" style="width:100%; height:800px"></div>
+
+<script>
+var map = L.map('map',{
+        minZoom: 8,
+        maxZoom: 12
+    });
+
+// Add OpenStreetMap layer
+var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+var osmAttrib='Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors';
+var osm = new L.TileLayer(osmUrl, {minZoom: 8, maxZoom: 12, attribution: osmAttrib}).addTo(map);
+
+// Add custom NDVI layer
+var ndvi = L.tileLayer('ndvi_tiles/{z}/{x}/{y}.png', {
+        noWrap: true,
+        tms: true
+    }).addTo(map);
+    
+map.setView([50.3, 36.6], 8); // Focus on our area, see WRS-2 system
+</script>
+
+<footer class="footer-distributed">
+
+			<div class="footer-left">
+			
+				<p>Intetics Geo &copy; 2015</p>
+				
+			</div>
+
+		</footer>
+
+</body>
+</html>
